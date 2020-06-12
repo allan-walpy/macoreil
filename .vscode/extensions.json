@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        // highlight for TODO and FIXME;
+        "wayou.vscode-todo-highlight"
+    ],
+    "unwantedRecommendations": []
+}
