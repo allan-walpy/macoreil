@@ -1,8 +1,46 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+    <!-- assembly config; -->
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <RuntimeIdentifiers>linux-x64;debian.10-x64;ubuntu.20.04-x64;alpine.3.12-x64;</RuntimeIdentifiers>
+        <AssemblyName>Macoreil.Core</AssemblyName>
+        <RootNamespace>Macoreil.Core</RootNamespace>
+    </PropertyGroup>
+
+    <!-- package info; -->
+    <PropertyGroup>
+        <AssemblyTitle>Macoreil.Core</AssemblyTitle>
+        <PackageId>Macoreil.Core</PackageId>
+        <Version>0.1.0-zero</Version>
+        <Authors>allan_walpy aka Andrey Lysenkov</Authors>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <Description>mail service core</Description>
+        <PackageProjectUrl>https://github.com/allan-walpy/macoreil</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/allan-walpy/macoreil/blob/master/license</PackageLicenseUrl>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/allan-walpy/macoreil</RepositoryUrl>
+    </PropertyGroup>
+
+    <!-- compilation config; -->
+    <PropertyGroup>
+        <OutputPath>../../out/bin/$(Configuration)/</OutputPath>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <DocumentationFile>../../out/bin/$(Configuration)/$(TargetFramework)/docs/core.xml</DocumentationFile>
+        <DebugSymbols>false</DebugSymbols>
+        <IncludeSource>true</IncludeSource>
+    </PropertyGroup>
+
+    <!-- debug configuration; -->
+    <PropertyGroup Condition="$(Configuration)=='Debug'">
+        <DefineConstants>DEBUG;</DefineConstants>
+    </PropertyGroup>
+
+    <!-- TODO:TMP: turn off documentation warnings; -->
+    <PropertyGroup>
+        <NoWarn>1591;1573;</NoWarn>
+    </PropertyGroup>
 
 </Project>
