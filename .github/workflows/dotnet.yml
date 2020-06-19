@@ -16,7 +16,7 @@ jobs:
     - name: install dotnet.preview
       uses: actions/setup-dotnet@master
       with:
-        dotnet-version: 5.*
+        dotnet-version: 5.0.100-preview.5.20279.10
     - name: restore
       run: dotnet restore
     - name: build
