@@ -2,7 +2,8 @@
 
     <!-- assembly config; -->
     <PropertyGroup>
-        <OutputType>Exe</OutputType><!-- TODO:TMP: for testing alpha version purposes, remove later; -->
+        <!-- TODO:TMP: for testing alpha version purposes, remove later; -->
+        <OutputType>Exe</OutputType>
         <TargetFramework>net5.0</TargetFramework>
         <LangVersion>latest</LangVersion>
         <RuntimeIdentifiers>linux-x64;debian.10-x64;ubuntu-x64;alpine-x64;</RuntimeIdentifiers>
@@ -43,5 +44,18 @@
     <PropertyGroup>
         <NoWarn>1591;1573;</NoWarn>
     </PropertyGroup>
+
+    <!-- framework tools dependecies;-->
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0-preview.5.*">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <!-- framework dependecies; -->
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0-preview.5.*" />
+    </ItemGroup>
 
 </Project>
