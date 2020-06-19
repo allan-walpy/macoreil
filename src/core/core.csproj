@@ -2,9 +2,10 @@
 
     <!-- assembly config; -->
     <PropertyGroup>
+        <OutputType>Exe</OutputType><!-- TODO:TMP: for testing alpha version purposes, remove later; -->
         <TargetFramework>net5.0</TargetFramework>
         <LangVersion>latest</LangVersion>
-        <RuntimeIdentifiers>linux-x64;debian.10-x64;ubuntu.20.04-x64;alpine.3.12-x64;</RuntimeIdentifiers>
+        <RuntimeIdentifiers>linux-x64;debian.10-x64;ubuntu-x64;alpine-x64;</RuntimeIdentifiers>
         <AssemblyName>Macoreil.Core</AssemblyName>
         <RootNamespace>Macoreil.Core</RootNamespace>
     </PropertyGroup>
