@@ -4,11 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Macoreil.Core.Database
 {
-
     [Table(ApplicationContext.EntryTableName)]
     public class EntryModel
     {
-
         [Key]
         public int Id { get; set; }
 
@@ -29,7 +27,5 @@ namespace Macoreil.Core.Database
 
         [Required]
         public string Content { get; set; }
-
     }
-
 }

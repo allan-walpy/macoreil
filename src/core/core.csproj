@@ -15,7 +15,7 @@
     <PropertyGroup>
         <AssemblyTitle>Macoreil.Core</AssemblyTitle>
         <PackageId>Macoreil.Core</PackageId>
-        <Version>0.1.0-zero</Version>
+        <Version>0.1.0-alpha</Version>
         <Authors>allan_walpy aka Andrey Lysenkov</Authors>
         <NeutralLanguage>en-US</NeutralLanguage>
         <Description>mail service core</Description>

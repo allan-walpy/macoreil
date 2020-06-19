@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Macoreil.Core.Database
 {
-
     [Table(ApplicationContext.AuthorTableName)]
     public class AuthorModel
     {
@@ -21,7 +20,5 @@ namespace Macoreil.Core.Database
         public string PublicKey { get;  set; }
 
         public ICollection<EntryModel> Entries { get; set; }
-
     }
-
 }
