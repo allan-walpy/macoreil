@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Worker">
 
     <!-- assembly config; -->
     <PropertyGroup>
@@ -47,8 +47,10 @@
 
     <!-- framework dependecies; -->
     <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0-preview.*" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0-preview.*" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0-preview.*" />
+        <PackageReference Include="MySql.Data" Version="8.*" />
+        <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.*" />
     </ItemGroup>
 
 </Project>
