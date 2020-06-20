@@ -8,15 +8,15 @@ namespace Macoreil.Core.Database
         public const string AuthorTableName = "Author";
         public const string EntryTableName = "Entry";
 
-        public static string DefaultGuid = System.Guid.Empty.ToString();
-        public static int IdLength = DefaultGuid.Length;
+        public static readonly string DefaultGuid = System.Guid.Empty.ToString();
+        public static readonly int IdLength = DefaultGuid.Length;
 
         public const int AuthorLoginMaxLength = 15;
 
         public const int AuthorDisplayNameMaxLength = 31;
 
         //TODO:get fixed value;
-        public static int AuthorPublicKeyLength = 255;
+        public static readonly int AuthorPublicKeyLength = 255;
 
         public DbSet<AuthorModel> Authors { get; set; }
         public DbSet<EntryModel> Entries { get; set; }
