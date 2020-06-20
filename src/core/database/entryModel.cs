@@ -7,25 +7,34 @@ namespace Macoreil.Core.Database
     [Table(ApplicationContext.EntryTableName)]
     public class EntryModel
     {
-        [Key]
-        public int Id { get; set; }
+        public enum VisibilityType
+        {
+            Self,
+            Public
+        }
 
-        [Required]
+        public enum ContentType
+        {
+            None,
+            Text,
+            File
+        }
+
+        public string Id { get; set; }
+
         public AuthorModel Author { get; set; }
         public int AuthorId { get; set; }
 
-        [Required]
         public DateTime CreatedAt { get; set; }
 
         public DateTime? EditedAt { get; set; }
 
-        [Required]
+        public VisibilityType AvailableTo { get; set; }
+
         public string Title { get; set; }
 
-        [Required]
-        public ContentType StoreAs { get; set;  }
+        public ContentType StoredAs { get; set; }
 
-        [Required]
         public string Content { get; set; }
     }
 }

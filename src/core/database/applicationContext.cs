@@ -1,10 +1,183 @@
+using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace Macoreil.Core.Database
 {
-    public class ApplicationContext : DbContext
+    public sealed class ApplicationContext : DbContext
     {
         public const string AuthorTableName = "Author";
         public const string EntryTableName = "Entry";
+
+        public static string DefaultGuid = System.Guid.Empty.ToString();
+        public static int IdLength = DefaultGuid.Length;
+
+        public const int AuthorLoginMaxLength = 15;
+
+        public const int AuthorDisplayNameMaxLength = 31;
+
+        public static int AuthorPublicKeyLength = 255; //TODO:get fixed value;
+
+        public DbSet<AuthorModel> Authors { get; set; }
+        public DbSet<EntryModel> Entries { get; set; }
+
+
+        public ApplicationContext(DbContextOptions options)
+            : base(options)
+        {
+            Database.EnsureCreated();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            ConfigureAuthorsTable(modelBuilder);
+            ConfigureEntriesTable(modelBuilder);
+
+            ConfigureRelationships(modelBuilder);
+        }
+
+        private static void ConfigureAuthorsTable(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AuthorModel>()
+                .HasIndex(a => a.Id)
+                .IsUnique();
+
+            modelBuilder.Entity<AuthorModel>()
+                .Property(a => a.Id)
+                .IsRequired()
+                .IsFixedLength(true)
+                .HasMaxLength(IdLength)
+                .ValueGeneratedOnAdd()
+                .HasDefaultValue(DefaultGuid);
+
+            modelBuilder.Entity<AuthorModel>()
+                .Property(a => a.Login)
+                .IsRequired()
+                .HasMaxLength(AuthorLoginMaxLength);
+
+            modelBuilder.Entity<AuthorModel>()
+                .Property(a => a.DisplayName)
+                .HasMaxLength(AuthorDisplayNameMaxLength)
+                .HasDefaultValue(String.Empty);
+
+            modelBuilder.Entity<AuthorModel>()
+                .Property(a => a.PublicKey)
+                .IsRequired()
+                .IsFixedLength(true)
+                .HasMaxLength(AuthorPublicKeyLength);
+        }
+
+        private static void ConfigureEntriesTable(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<EntryModel>()
+                .HasIndex(a => a.Id)
+                .IsUnique();
+
+            modelBuilder.Entity<EntryModel>()
+                .Property(a => a.Id)
+                .IsFixedLength(true)
+                .HasMaxLength(IdLength)
+                .HasDefaultValue(typeof(GuidGenerator))
+                .ValueGeneratedOnAdd()
+                .HasDefaultValue(DefaultGuid);
+
+            modelBuilder.Entity<EntryModel>()
+                .Property(a => a.CreatedAt)
+                .IsRequired()
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<EntryModel>()
+                .Property(a => a.EditedAt)
+                .IsRequired()
+                .ValueGeneratedOnAddOrUpdate();
+
+            modelBuilder.Entity<EntryModel>()
+        }
+
+        private static void ConfigureRelationships(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AuthorModel>()
+                .HasMany(a => a.Entries)
+                .WithOne(e => e.Author)
+                .HasForeignKey(e => e.AuthorId)
+                .HasPrincipalKey(a => a.EntriesId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
+
     }
 }
+
+
+/*
+
+        private static string DefaultGuid => System.Guid.Empty.ToString();
+
+        private static void ConfigureVacancyTable(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<VacancyModel>()
+                .Property(v => v.ContactPerson)
+                .HasConversion(
+                    (v) => JsonConvert.SerializeObject(v),
+                    (j) => JsonConvert.DeserializeObject<Person>(j)
+                );
+
+            modelBuilder.Entity<VacancyModel>()
+                .Property(v => v.EmploymentType)
+                .HasConversion(
+                    (v) => JsonConvert.SerializeObject(v),
+                    (j) => JsonConvert.DeserializeObject<EmploymentType[]>(j)
+                );
+        }
+
+        private static void ConfigureOrganizationTable(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrganizationModel>()
+                .Property(o => o.Id)
+                .HasValueGenerator(typeof(GuidGenerator))
+                .ValueGeneratedOnAdd()
+                .HasDefaultValue(DefaultGuid);
+        }
+
+        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+            : base(options)
+        {
+            Database.EnsureCreated();
+        }
+
+        private void ConfigureCustomers(ref ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Customer>()
+                .HasIndex(c => new
+                {
+                    c.FirstName,
+                    c.SecondName,
+                    c.ThirdName
+                }).IsUnique();
+
+            modelBuilder.Entity<Customer>()
+                .Property(c => c.ThirdName)
+                .HasDefaultValue(null);
+        }
+
+        private void ConfigureRooms(ref ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Room>()
+                .HasIndex(r => r.Number).IsUnique();
+
+            modelBuilder.Entity<Room>()
+                .Property(r => r.Capacity)
+                .HasDefaultValue(1);
+
+            modelBuilder.Entity<Room>()
+                .Property(r => r.Category)
+                .HasDefaultValue(RoomCategory.Standart);
+        }
+
+
+
+
+    }
+} */

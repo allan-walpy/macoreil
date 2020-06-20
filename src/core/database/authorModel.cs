@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Macoreil.Core.Database
@@ -7,18 +6,15 @@ namespace Macoreil.Core.Database
     [Table(ApplicationContext.AuthorTableName)]
     public class AuthorModel
     {
-        [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
-        [Required]
         public string Login { get;  set; }
 
-        [Required]
         public string DisplayName { get; set; }
 
-        [Required]
         public string PublicKey { get;  set; }
 
-        public ICollection<EntryModel> Entries { get; set; }
+        public IList<EntryModel> Entries { get; set; }
+        public IList<EntryModel> EntriesId { get; set; }
     }
 }
