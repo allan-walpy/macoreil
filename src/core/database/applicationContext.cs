@@ -21,7 +21,6 @@ namespace Macoreil.Core.Database
         public DbSet<AuthorModel> Authors { get; set; }
         public DbSet<EntryModel> Entries { get; set; }
 
-
         public ApplicationContext(DbContextOptions options)
             : base(options)
         {
@@ -105,6 +104,5 @@ namespace Macoreil.Core.Database
                 .HasPrincipalKey(a => a.EntriesId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
-
     }
 }

@@ -16,6 +16,5 @@ namespace Macoreil.Core
                 {
                     services.AddHostedService<Worker>();
                 });
-
     }
 }

@@ -7,7 +7,6 @@ namespace Macoreil.Core
 {
     public class Worker : BackgroundService
     {
-
         private readonly ILogger<Worker> _logger;
 
         public Worker(ILogger<Worker> logger)
