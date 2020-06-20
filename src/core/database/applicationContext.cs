@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace Macoreil.Core.Database
@@ -16,7 +15,8 @@ namespace Macoreil.Core.Database
 
         public const int AuthorDisplayNameMaxLength = 31;
 
-        public static int AuthorPublicKeyLength = 255; //TODO:get fixed value;
+        //TODO:get fixed value;
+        public static int AuthorPublicKeyLength = 255;
 
         public DbSet<AuthorModel> Authors { get; set; }
         public DbSet<EntryModel> Entries { get; set; }
@@ -93,7 +93,7 @@ namespace Macoreil.Core.Database
                 .IsRequired()
                 .ValueGeneratedOnAddOrUpdate();
 
-            modelBuilder.Entity<EntryModel>()
+            modelBuilder.Entity<EntryModel>();
         }
 
         private static void ConfigureRelationships(ModelBuilder modelBuilder)
@@ -108,76 +108,3 @@ namespace Macoreil.Core.Database
 
     }
 }
-
-
-/*
-
-        private static string DefaultGuid => System.Guid.Empty.ToString();
-
-        private static void ConfigureVacancyTable(ModelBuilder modelBuilder)
-        {
-
-            modelBuilder.Entity<VacancyModel>()
-                .Property(v => v.ContactPerson)
-                .HasConversion(
-                    (v) => JsonConvert.SerializeObject(v),
-                    (j) => JsonConvert.DeserializeObject<Person>(j)
-                );
-
-            modelBuilder.Entity<VacancyModel>()
-                .Property(v => v.EmploymentType)
-                .HasConversion(
-                    (v) => JsonConvert.SerializeObject(v),
-                    (j) => JsonConvert.DeserializeObject<EmploymentType[]>(j)
-                );
-        }
-
-        private static void ConfigureOrganizationTable(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<OrganizationModel>()
-                .Property(o => o.Id)
-                .HasValueGenerator(typeof(GuidGenerator))
-                .ValueGeneratedOnAdd()
-                .HasDefaultValue(DefaultGuid);
-        }
-
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
-            : base(options)
-        {
-            Database.EnsureCreated();
-        }
-
-        private void ConfigureCustomers(ref ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Customer>()
-                .HasIndex(c => new
-                {
-                    c.FirstName,
-                    c.SecondName,
-                    c.ThirdName
-                }).IsUnique();
-
-            modelBuilder.Entity<Customer>()
-                .Property(c => c.ThirdName)
-                .HasDefaultValue(null);
-        }
-
-        private void ConfigureRooms(ref ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Room>()
-                .HasIndex(r => r.Number).IsUnique();
-
-            modelBuilder.Entity<Room>()
-                .Property(r => r.Capacity)
-                .HasDefaultValue(1);
-
-            modelBuilder.Entity<Room>()
-                .Property(r => r.Category)
-                .HasDefaultValue(RoomCategory.Standart);
-        }
-
-
-
-
-    }
-} */
