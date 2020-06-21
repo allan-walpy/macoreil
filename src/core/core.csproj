@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <!-- assembly config; -->
     <PropertyGroup>
         <!-- TODO:TMP: for testing alpha version purposes, remove later; -->
         <OutputType>Exe</OutputType>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>netcoreapp5.0</TargetFramework>
         <LangVersion>latest</LangVersion>
         <RuntimeIdentifiers>linux-x64;debian.10-x64;ubuntu-x64;alpine-x64;</RuntimeIdentifiers>
         <AssemblyName>Macoreil.Core</AssemblyName>

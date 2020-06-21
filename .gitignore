@@ -3,6 +3,8 @@
 [Oo]ut
 [Bb]in
 
-# confidentioal files
-*.secret.*
+# confidential files
+*.hide
 *.hide.*
+*.secret
+*.secret.*
